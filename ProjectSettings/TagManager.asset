@@ -47,3 +47,9 @@ TagManager:
   - name: Items
     uniqueID: 2808925429
     locked: 0
+  - name: Units
+    uniqueID: 3228702489
+    locked: 0
+  - name: Foreground
+    uniqueID: 481176971
+    locked: 0
