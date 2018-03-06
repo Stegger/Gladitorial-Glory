@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Animator))]
 public class PlayerMovement : MonoBehaviour
 {
-    public float WalkSpeed = 1f;
-    public float RunSpeed = 2f;
+    public Character characterType;
     public Ability ability;
 
     private float speed = 0f;
@@ -18,10 +20,10 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         rbody = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
         _renderer = GetComponent<SpriteRenderer>();
-        speed = WalkSpeed;
         ability.Initialize(transform.gameObject);
+        animator = GetComponent<Animator>();
+        animator.runtimeAnimatorController = characterType.animator;
     }
 
 
@@ -68,11 +70,11 @@ public class PlayerMovement : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.LeftShift))
             {
-                speed = RunSpeed;
+                speed = characterType.runSpeed;
             }
             else
             {
-                speed = WalkSpeed;
+                speed = characterType.walkSpeed;
             }
         }
         movementDirection = dir.normalized * speed;
