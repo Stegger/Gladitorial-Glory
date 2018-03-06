@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public float WalkSpeed = 1f;
     public float RunSpeed = 2f;
+    public Ability ability;
 
     private float speed = 0f;
     private Vector2 movementDirection;
@@ -20,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
         animator = GetComponent<Animator>();
         _renderer = GetComponent<SpriteRenderer>();
         speed = WalkSpeed;
+        ability.Initialize(transform.gameObject);
     }
 
 
@@ -34,14 +36,20 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Q))
+        {
             animator.SetTrigger("Die");
+        }
         else if (Input.GetKeyDown(KeyCode.Space))
         {
             animator.SetTrigger("Attack");
+            Debug.Log("Triggering ability " + ability.name);
+            ability.TriggerAbility();
             movementDirection = Vector2.zero;
         }
         else
+        {
             Move();
+        }
     }
 
     private void Move()

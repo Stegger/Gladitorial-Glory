@@ -219,7 +219,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 186505731}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.00000011920929, y: -0.000000834465, z: -10}
+  m_LocalPosition: {x: 0.00000023841858, y: -0.000000834465, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -68780,7 +68780,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1303157275}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.00000011920929, y: -0.000000834465, z: -10}
+  m_LocalPosition: {x: 0.00000023841858, y: -0.000000834465, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 313884240}
@@ -68948,6 +68948,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WalkSpeed: 1
   RunSpeed: 3
+  ability: {fileID: 11400000, guid: 5a3effcb21f8ed84288a3d6e9832f4cb, type: 2}
 --- !u!95 &1923811121
 Animator:
   serializedVersion: 3
