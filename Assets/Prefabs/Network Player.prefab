@@ -24,7 +24,6 @@ GameObject:
   - component: {fileID: 114703002280212462}
   - component: {fileID: 70522933679663928}
   - component: {fileID: 95572686811978714}
-  - component: {fileID: 114976681423886810}
   m_Layer: 0
   m_Name: Network Player
   m_TagString: Player
@@ -89,7 +88,7 @@ Animator:
   m_GameObject: {fileID: 1597251498823154}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 22100000, guid: 72af3261cedd977489f1538bae6d7053, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 2
   m_UpdateMode: 1
   m_ApplyRootMotion: 0
@@ -108,41 +107,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67a83524fb6ae0b4b9a51a9ca5450d5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WalkSpeed: 1
-  RunSpeed: 3
+  characterType: {fileID: 11400000, guid: fd46b0a2500ba1d47b27b2067e8779f7, type: 2}
   ability: {fileID: 11400000, guid: 5a3effcb21f8ed84288a3d6e9832f4cb, type: 2}
---- !u!114 &114976681423886810
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1597251498823154}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 45
-    i1: 217
-    i2: 224
-    i3: 59
-    i4: 102
-    i5: 38
-    i6: 98
-    i7: 148
-    i8: 249
-    i9: 182
-    i10: 138
-    i11: 169
-    i12: 126
-    i13: 45
-    i14: 32
-    i15: 229
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 1
 --- !u!212 &212860193238129612
 SpriteRenderer:
   m_ObjectHideFlags: 1
