@@ -64,12 +64,12 @@ public class PlayerMovement : NetworkBehaviour
             return;
 
         curHealth -= dmg;
-        Debug.Log("I'm hurt on the server!!");
+        Debug.Log("I'm hurt on the server!! (" + curHealth + ")");
         if (curHealth <= 0)
         {
             curHealth = 0;
-            GetComponent<NetworkAnimator>().SetTrigger("Die");
             isDead = true;
+            GetComponent<NetworkAnimator>().SetTrigger("Die");
         }
     }
 
@@ -85,6 +85,7 @@ public class PlayerMovement : NetworkBehaviour
     void Update()
     {
         _renderer.flipX = isFlipped;
+
 
         if (!isLocalPlayer || isDead)
         {

@@ -47,5 +47,7 @@ public class PlayerAbilityExec : NetworkBehaviour
             GetComponent<NetworkAnimator>().SetTrigger("Attack");
         }
     }
- 
+
+   
+    
 }
