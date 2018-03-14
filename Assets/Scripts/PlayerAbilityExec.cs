@@ -5,9 +5,8 @@ using UnityEngine.Networking;
 
 public class PlayerAbilityExec : NetworkBehaviour
 {
-    public MeeleAttackAbility meeleAbility;
-
     public Collider2D meeleHurtbox;
+    public int damage;
 
     private Collider2D[] targets;
     private PlayerMovement pmOther;
@@ -16,8 +15,11 @@ public class PlayerAbilityExec : NetworkBehaviour
     // Use this for initialization
     public override void OnStartLocalPlayer()
     {
-        meeleAbility.Initialize(this.gameObject);
-        targets = new Collider2D[meeleAbility.targetsToHit + 1];
+    }
+
+    private void Start()
+    {
+        targets = new Collider2D[4];
         contactFilter2D = new ContactFilter2D();
         LayerMask lm = new LayerMask
         {
@@ -34,20 +36,23 @@ public class PlayerAbilityExec : NetworkBehaviour
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            int c = meeleHurtbox.OverlapCollider(contactFilter2D, targets);
-            for (int i = 0; i < c; i++)
-            {
-                if (targets[i].gameObject != gameObject)
-                {
-                    pmOther = targets[i].gameObject.GetComponent<PlayerMovement>();
-                    if (pmOther != null)
-                        pmOther.CmdTakeDamage(meeleAbility.damage);
-                }
-            }
-            GetComponent<NetworkAnimator>().SetTrigger("Attack");
+            CmdAttackMeele();
         }
     }
 
-   
-    
+    [Command]
+    private void CmdAttackMeele()
+    {
+        int c = meeleHurtbox.OverlapCollider(contactFilter2D, targets);
+        for (int i = 0; i < c; i++)
+        {
+            if (targets[i].gameObject != gameObject)
+            {
+                pmOther = targets[i].gameObject.GetComponent<PlayerMovement>();
+                if (pmOther != null)
+                    pmOther.CmdTakeDamage(damage);
+            }
+        }
+        GetComponent<NetworkAnimator>().SetTrigger("Attack");
+    }
 }

@@ -10,6 +10,7 @@ using UnityEngine.Networking;
 public class PlayerMovement : NetworkBehaviour
 {
     public Character characterType;
+    public RectTransform healthBar;
 
     private float speed = 0f;
     private Vector2 movementDirection;
@@ -24,7 +25,7 @@ public class PlayerMovement : NetworkBehaviour
     [SyncVar]
     private bool isDead;
 
-    [SyncVar]
+    [SyncVar(hook = "UpdateHealthBar")]
     private int curHealth;
 
     [SyncVar]
@@ -45,16 +46,29 @@ public class PlayerMovement : NetworkBehaviour
         isFlipped = false;
     }
 
+
     public override void OnStartLocalPlayer()
     {
         GetComponent<SpriteRenderer>().material.color = Color.blue;
         GameObject.Find("CM vcam1").GetComponent<Cinemachine.CinemachineVirtualCamera>().Follow = transform;
     }
 
+    public void UpdateHealthBar(int curHealth)
+    {
+        healthBar.sizeDelta = new Vector2(curHealth, healthBar.sizeDelta.y); 
+    }
+
     [Command]
     void CmdFlipRenderer(bool value)
     {
-        isFlipped = value;
+        if (isFlipped != value)
+        {
+            BoxCollider2D box = GetComponent<BoxCollider2D>();
+            Vector2 offset = box.offset;
+            offset.x = offset.x * -1;
+            box.offset = offset;
+            isFlipped = value;
+        }
     }
 
     [Command]
@@ -64,7 +78,6 @@ public class PlayerMovement : NetworkBehaviour
             return;
 
         curHealth -= dmg;
-        Debug.Log("I'm hurt on the server!! (" + curHealth + ")");
         if (curHealth <= 0)
         {
             curHealth = 0;
@@ -73,12 +86,21 @@ public class PlayerMovement : NetworkBehaviour
         }
     }
 
+
+
     private void FixedUpdate()
     {
         if (!isLocalPlayer)
             return;
 
-        rbody.velocity = movementDirection;
+        CmdSetMovementDirection(movementDirection);
+    }
+
+    [Command]
+    private void CmdSetMovementDirection(Vector2 dir)
+    {
+        rbody.velocity = dir;
+        animator.SetFloat("Speed", dir.magnitude);
     }
 
     // Update is called once per frame
@@ -93,7 +115,6 @@ public class PlayerMovement : NetworkBehaviour
         }
 
         Move();
-        animator.SetFloat("Speed", speed);
     }
 
     private void Move()
