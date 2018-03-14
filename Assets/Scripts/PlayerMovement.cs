@@ -67,7 +67,7 @@ public class PlayerMovement : NetworkBehaviour
         GameObject.Find("CM vcam1").GetComponent<Cinemachine.CinemachineVirtualCamera>().Follow = transform;
         string name = GameObject.Find("Name Field").GetComponent<Text>().text.Trim();
         CmdChangeName(name);
-        Destroy(GameObject.Find("Name Field"));
+        Destroy(GameObject.Find("Name Field").transform.parent.gameObject);
     }
 
     public void NameUpdate(string name)
