@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(Rigidbody2D))]
@@ -11,6 +12,7 @@ public class PlayerMovement : NetworkBehaviour
 {
     public Character characterType;
     public RectTransform healthBar;
+    public Text txtName;
 
     private float speed = 0f;
     private Vector2 movementDirection;
@@ -21,6 +23,9 @@ public class PlayerMovement : NetworkBehaviour
     private SpriteRenderer _renderer;
 
     private int maxHealth;
+
+    [SyncVar(hook = "NameUpdate")]
+    private string name;
 
     [SyncVar]
     private bool isDead;
@@ -46,10 +51,28 @@ public class PlayerMovement : NetworkBehaviour
         isFlipped = false;
     }
 
+    public void changeName()
+    {
+        CmdChangeName(txtName.name.Trim());
+    }
+
+    [Command]
+    public void CmdChangeName(string name)
+    {
+        this.name = name;
+    }
 
     public override void OnStartLocalPlayer()
     {
         GameObject.Find("CM vcam1").GetComponent<Cinemachine.CinemachineVirtualCamera>().Follow = transform;
+        string name = GameObject.Find("Name Field").GetComponent<Text>().text.Trim();
+        CmdChangeName(name);
+        Destroy(GameObject.Find("Name Field"));
+    }
+
+    public void NameUpdate(string name)
+    {
+        txtName.text = name;
     }
 
     public void UpdateHealthBar(int curHealth)
