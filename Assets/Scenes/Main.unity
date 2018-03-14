@@ -328,6 +328,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8df9776779367c741b0507c40a7ca2d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  txtMatchName: {fileID: 1453560847}
 --- !u!114 &389072607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1090,7 +1091,7 @@ GameObject:
   - component: {fileID: 1453560848}
   - component: {fileID: 1453560847}
   m_Layer: 5
-  m_Name: Text
+  m_Name: TxtMatchName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5022,7 +5023,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 389072606}
-        m_MethodName: StartGame
+        m_MethodName: JoinGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -49,7 +49,6 @@ public class PlayerMovement : NetworkBehaviour
 
     public override void OnStartLocalPlayer()
     {
-        GetComponent<SpriteRenderer>().material.color = Color.blue;
         GameObject.Find("CM vcam1").GetComponent<Cinemachine.CinemachineVirtualCamera>().Follow = transform;
     }
 

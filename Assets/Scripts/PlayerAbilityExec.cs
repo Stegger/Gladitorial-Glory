@@ -34,7 +34,7 @@ public class PlayerAbilityExec : NetworkBehaviour
         if (!isLocalPlayer)
             return;
 
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             CmdAttackMeele();
         }

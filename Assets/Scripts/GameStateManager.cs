@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameStateManager : MonoBehaviour
 {
     private Character type;
     private bool typeIsSelected;
+
+    public Text txtMatchName;
 
     private void Start()
     {
@@ -22,16 +25,12 @@ public class GameStateManager : MonoBehaviour
 
     public void StartGame()
     {
-        NetworkManager nm = GetComponent<NetworkManager>();
-        nm.networkAddress = "127.0.0.1";
-        nm.StartHost();
+   
     }
 
     public void JoinGame()
     {
-        NetworkManager nm = GetComponent<NetworkManager>();
-        nm.networkAddress = "127.0.0.1";
-        nm.StartClient();
+      
     }
     
 
